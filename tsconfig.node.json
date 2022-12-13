@@ -4,7 +4,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "lib": ["DOM", "DOM.Iterable", "ESNext", "ES5"],
   },
   "include": ["vite.config.ts", "manifest.json"]
 }

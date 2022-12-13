@@ -21,4 +21,5 @@ function App() {
   );
 }
 
-export default withErrorHandler(App, AppErrorBoundaryFallback);
+export default App;
+//export default withErrorHandler(App, AppErrorBoundaryFallback);

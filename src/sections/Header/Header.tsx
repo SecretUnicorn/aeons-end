@@ -21,7 +21,6 @@ import useSidebar from '@/store/sidebar';
 import useTheme from '@/store/theme';
 
 import { HotKeysButton } from './styled';
-import { getRandomJoke } from './utils';
 
 function Header() {
   const [, sidebarActions] = useSidebar();
@@ -42,7 +41,6 @@ function Header() {
         content: (
           <Alert severity="info">
             <AlertTitle>Notification demo (random IT jokes :))</AlertTitle>
-            {getRandomJoke()}
           </Alert>
         ),
       },

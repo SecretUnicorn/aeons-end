@@ -2,7 +2,7 @@ import isMobile from '@/utils/is-mobile';
 
 import type { Notifications } from './types';
 
-const title = 'React PWA';
+const title = 'Kaufinteressenten';
 
 const email = 'auther-email@gmail.com';
 
@@ -27,7 +27,7 @@ const messages = {
   404: 'Hey bro? What are you looking for?',
 };
 
-const dateFormat = 'MMMM DD, YYYY';
+const dateFormat = 'DD.MM.YYYY';
 
 const notifications: Notifications = {
   options: {
@@ -50,16 +50,6 @@ const defaultMetaTags = {
   image: '/cover.png',
   description: 'Starter kit for modern web applications',
 };
-const giphy404 = 'https://giphy.com/embed/xTiN0L7EW5trfOvEk0';
 
-export {
-  loader,
-  notifications,
-  dateFormat,
-  messages,
-  repository,
-  email,
-  title,
-  defaultMetaTags,
-  giphy404,
-};
+export { loader, notifications, dateFormat, messages, repository, email, title, defaultMetaTags };
+export * from './editorInserts';

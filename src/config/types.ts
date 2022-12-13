@@ -5,4 +5,9 @@ type Notifications = {
   maxSnack: number;
 };
 
-export type { Notifications };
+type EditorText = {
+  data: string;
+  label: string;
+  description: string;
+};
+export type { Notifications, EditorText };
