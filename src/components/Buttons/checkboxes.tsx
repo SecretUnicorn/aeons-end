@@ -1,22 +1,19 @@
-import { Checkbox, styled } from '@mui/material';
+import { Checkbox, CheckboxProps } from '@mui/material';
+import { styled } from '@mui/system';
 
-export const WhiteCheckbox = styled(Checkbox)({
-  root: {
+export const WhiteCheckbox = styled(Checkbox, { skipVariantsResolver: true })(({ theme }) => ({
+  '&.Mui-checked': {
     color: 'white',
-    '&$checked': {
-      color: 'white',
-    },
   },
-
-  checked: {},
-});
+  '&.MuiCheckbox-indeterminate': {
+    color: 'white',
+  },
+  color: 'white',
+}));
 
 export const PrimaryColorCheckbox = styled(Checkbox)(({ theme }) => ({
-  root: {
+  color: theme.palette.primary.main,
+  '&.Mui-checked': {
     color: theme.palette.primary.main,
-    '&$checked': {
-      color: 'primary.main',
-    },
   },
-  checked: {},
 }));

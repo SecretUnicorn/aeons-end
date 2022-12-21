@@ -3,7 +3,7 @@ import { FullSizeCenteredFlexBox } from '@/components/styled';
 import useOrientation from '@/hooks/useOrientation';
 import useCounter from '@/store/counter';
 
-const Welcome: React.FC = () => {
+const Welcome: React.FC<React.PropsWithChildren<unknown>> = () => {
   const isPortrait = useOrientation();
   const [counter, actions] = useCounter();
 
@@ -12,9 +12,6 @@ const Welcome: React.FC = () => {
       <Meta title="Übersicht" />
       <FullSizeCenteredFlexBox flexDirection={isPortrait ? 'column' : 'row'}>
         <span>{counter}</span>
-        <button onClick={actions.increase}>Plus</button>
-        <button onClick={actions.decrease}>minus</button>
-        <button onClick={actions.reset}>reset</button>
       </FullSizeCenteredFlexBox>
     </>
   );

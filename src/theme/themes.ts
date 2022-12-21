@@ -197,13 +197,6 @@ const themes: Record<Themes, ThemeOptions> = {
   light: deepmerge(sharedTheme, {
     palette: {
       mode: 'light',
-      background: {
-        default: '#fafafa',
-        paper: '#fff',
-      },
-      primary: {
-        main: '#3f51b5',
-      },
     },
   }),
 

@@ -1,4 +1,4 @@
-import { FC, Suspense, lazy, useEffect, useState } from 'react';
+import { FC, PropsWithChildren, Suspense, lazy, useEffect, useState } from 'react';
 
 import sleep from '@/utils/sleep';
 
@@ -25,7 +25,7 @@ import { AnyProps, LoadComponent, LoaderDefaultOptions } from './types';
 // takes less than a certain amount of time
 // So, the implementation of it is here:
 
-function getDelayedFallback(Fallback: FC, delay: number) {
+function getDelayedFallback(Fallback: JSX.Element, delay: number) {
   return function DelayedFallback(props: AnyProps) {
     const [isDelayPassed, setIsDelayPassed] = useState(false);
 
@@ -105,7 +105,7 @@ function asyncComponentLoader(
   loadComponent: LoadComponent,
   additionalProps: AnyProps,
   loaderOptions: LoaderDefaultOptions,
-  FallbackWaiting: FC,
+  FallbackWaiting: FC<React.PropsWithChildren<unknown>>,
 ) {
   const Fallback = loaderOptions.delay
     ? getDelayedFallback(FallbackWaiting, loaderOptions.delay)

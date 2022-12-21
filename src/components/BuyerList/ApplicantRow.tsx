@@ -9,12 +9,13 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { IBuyInterest } from '@/models/buyInterestModels';
 import { dateToGermanString, trimLongTextAfter } from '@/utils/formatters';
 
 import { PrimaryColorCheckbox } from '../Buttons/checkboxes';
 
 type ApplicantRowProps = {
-  applicant: any;
+  applicant: IBuyInterest;
   markRandom?: boolean;
   idx: number;
   checked: boolean;
@@ -29,20 +30,15 @@ function ApplicantRow(props: ApplicantRowProps) {
   const { idx, checked, onCheck, info } = props;
 
   const websiteroot = '/';
-  const property_type = (applicant: any) => {
-    const tooltip = applicant.type_txt;
+  const property_type = (applicant: IBuyInterest) => {
+    const tooltip = applicant.category.name;
     let icon;
-    switch (applicant.type_nr) {
-      case 0:
-        icon = 'ETW';
-        break;
-      case 1:
-        icon = 'RH';
-        break;
+    switch (applicant.category.id) {
       case 2:
-        icon = 'MFH';
+        icon = 'IO';
         break;
       default:
+        icon = 'EW';
         break;
     }
     return (
@@ -102,7 +98,15 @@ function ApplicantRow(props: ApplicantRowProps) {
     }
   };
 
-  const address = `${applicant.street} ${applicant.plz}, ${applicant.city}`;
+  const wishes = {
+    eg: applicant.wants_ground_floor,
+    og: applicant.wants_upstairs,
+    ph: applicant.wants_penthouse,
+  };
+
+  console.log({ wishes });
+
+  const address = `${applicant.street} ${applicant.zip}, ${applicant.city}`;
 
   return (
     <tr
@@ -117,7 +121,8 @@ function ApplicantRow(props: ApplicantRowProps) {
           onChange={(event, value) => onCheck(idx, value)}
         />
       </td>
-      <td>{genderIcon(applicant.gender)}</td>
+      <td>{property_type(applicant)}</td>
+      <td>{genderIcon(applicant.salutation)}</td>
       <td colSpan={3}>
         {applicant.last_name}, {applicant.first_name}
       </td>
@@ -152,53 +157,43 @@ function ApplicantRow(props: ApplicantRowProps) {
         }}
         style={{ fontSize: 'small' }}
       >
-        <a className="unobtrusive-link hover-indicator" href={`tel:${applicant.applicant.phone}`}>
-          {applicant.applicant.phone}
+        <a className="unobtrusive-link hover-indicator" href={`tel:${applicant.telephone_number}`}>
+          {applicant.telephone_number}
         </a>{' '}
         <br />
-        <a className="unobtrusive-link hover-indicator" href={`tel:${applicant.applicant.mobile}`}>
-          {applicant.applicant.mobile}
+        <a className="unobtrusive-link hover-indicator" href={`tel:${applicant.mobile_number}`}>
+          {applicant.mobile_number}
         </a>
       </td>
-      <td>{property_type(applicant)}</td>
-      <td colSpan={3}>
-        {applicant.room_min ?? '-'} bis {applicant.room_max ?? '-'}
-      </td>
-      <td colSpan={3}>
-        {applicant.sqm_min ?? '-'} bis {applicant.sqm_max ?? '-'}
-      </td>
-      {!Object.values(applicant.wishes).includes(true) ||
-      !Object.values(applicant.wishes).includes(false) ? (
-        <td colSpan={4}>Keine Vorliebe</td>
-      ) : (
-        <td colSpan={4}>
-          <Grid container>
-            <Grid item xs={4}>
-              {wishIcon(applicant.wishes.eg)}
-            </Grid>
-            <Grid item xs={4}>
-              {wishIcon(applicant.wishes.og)}
-            </Grid>
-            <Grid item xs={4}>
-              {wishIcon(applicant.wishes.ph)}
-            </Grid>
-          </Grid>
+
+      {applicant.category.id == 1 ? (
+        <td colSpan={3}>
+          {applicant.room_from ?? '-'} bis {applicant.room_to ?? '-'}
         </td>
+      ) : (
+        <td colSpan={3}>- bis -</td>
       )}
-      {!Object.values(applicant.wishes).includes(true) ||
-      !Object.values(applicant.wishes).includes(false) ? (
+      {applicant.category.id == 1 ? (
+        <td colSpan={3}>
+          {applicant.space_from ?? '-'} bis {applicant.space_to ?? '-'}
+        </td>
+      ) : (
+        <td colSpan={3}>- bis -</td>
+      )}
+
+      {!Object.values(wishes).includes(true) || !Object.values(wishes).includes(false) ? (
         <td colSpan={4}>Keine Vorliebe</td>
       ) : (
         <td colSpan={4}>
           <Grid container>
             <Grid item xs={4}>
-              {wishIcon(applicant.wishes.eg)}
+              {wishIcon(true)}
             </Grid>
             <Grid item xs={4}>
-              {wishIcon(applicant.wishes.og)}
+              {wishIcon(wishes.og)}
             </Grid>
             <Grid item xs={4}>
-              {wishIcon(applicant.wishes.ph)}
+              {wishIcon(wishes.ph)}
             </Grid>
           </Grid>
         </td>
@@ -209,16 +204,17 @@ function ApplicantRow(props: ApplicantRowProps) {
           currency: 'EUR',
           //@ts-ignore
           trailingZeroDisplay: 'stripIfInteger',
-        }).format(applicant.max_price)}
+        }).format(applicant.purchase_price)}
       </td>
       <Tooltip title={applicant.comment}>
         <td style={{ fontSize: 'small' }} colSpan={4}>
-          {trimLongTextAfter(applicant.comment, 50)}
+          {trimLongTextAfter(applicant.comment ?? '', 50)}
         </td>
       </Tooltip>
       <td>
+        {/* TODO: Add Appointment */}
         <Tooltip
-          title={applicant.appointment_sent ? 'Einladung wurde schon versendet' : ''}
+          title={applicant.id == 0 ? 'Einladung wurde schon versendet' : ''}
           arrow
           enterDelay={350}
         >
@@ -227,16 +223,16 @@ function ApplicantRow(props: ApplicantRowProps) {
             <FontAwesomeIcon
               size="lg"
               icon={faCalendarCheck}
-              color={`rgba(60, 60, 60, ${applicant.appointment_sent ? 1 : 0.08})`}
+              color={`rgba(60, 60, 60, ${applicant.id == 0 ? 1 : 0.08})`}
             />{' '}
           </div>
         </Tooltip>
       </td>
       <td colSpan={2} style={{ fontSize: 'small' }}>
-        {dateToGermanString(new Date(applicant.created_at), false)}
+        {dateToGermanString(new Date(applicant.last_edited), false)}
       </td>
       <td colSpan={2} style={{ fontSize: 'small' }}>
-        {dateToGermanString(new Date(applicant.deleted_at), false)}
+        {dateToGermanString(new Date(applicant.last_edited), false)}
       </td>
     </tr>
   );

@@ -10,8 +10,8 @@ enum Pages {
 
 type PathRouteCustomProps = {
   title?: string;
-  component: FC;
-  icon?: FC<SvgIconProps>;
+  component: FC<React.PropsWithChildren<unknown>>;
+  icon?: FC<React.PropsWithChildren<SvgIconProps>>;
 };
 
 type Routes = Record<Pages, PathRouteProps & PathRouteCustomProps>;

@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import manifest from './manifest.json';
+import vitePluginFaviconsInject from 'vite-plugin-favicons-inject';
 
 /**
  *  VitePWA({
@@ -21,11 +22,15 @@ import manifest from './manifest.json';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    react()
+    react(),
+    vitePluginFaviconsInject('./src/assets/favicon.svg'),
   ],
   server: {
     hmr: true,
     port: 3100
+  },
+  build: {
+    assetsDir: "assets"
   },
   resolve: {
     alias: {

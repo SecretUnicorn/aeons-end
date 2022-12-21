@@ -6,7 +6,7 @@ type LoaderDefaultOptions = {
   minimumLoading: number;
 };
 
-type LoadComponent = () => Promise<{ default: ComponentType<any> }>;
+type LoadComponent = () => Promise<{ default: ComponentType<React.PropsWithChildren<any>> }>;
 
 type AnyProps = {
   [key: string]: any;

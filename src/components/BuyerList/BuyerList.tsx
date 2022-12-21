@@ -6,6 +6,9 @@ import AutoDeleteIcon from '@mui/icons-material/AutoDelete';
 import MessageIcon from '@mui/icons-material/Message';
 import { Grid, Tooltip } from '@mui/material';
 
+import { fetchAllIntersts } from '@/api/BuyerlistApi';
+import { IBuyInterest } from '@/models/buyInterestModels';
+
 import { WhiteCheckbox } from '../Buttons/checkboxes';
 import SendAppointmentDialog from '../Dialogs/SendAppointmentDialog';
 import { ColorButton } from '../styled';
@@ -123,13 +126,25 @@ function BuyerList() {
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedApplicants, setSelectedApplicants] = useState<any[]>([]);
-  const [loading, setLoading] = useState<bool>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const [applicants, setApplicants] = useState<IBuyInterest[]>([]);
 
   const check_amount = () => selection.filter((x) => x).length;
 
   const onMassCheck = () => {
     setSelection(Array(STANDINS.length).fill(!!selection.includes(false)));
   };
+
+  useEffect(() => {
+    fetchAllIntersts()
+      .then((response) => {
+        const results = response.data.results;
+        setApplicants(results);
+        setSelection(Array(results.length).fill(false));
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   //TODO: Type
   const check = (idx: number, value: any) => {
@@ -195,7 +210,7 @@ function BuyerList() {
       <table className="applicant-table" style={{ marginBottom: '5em' }}>
         <thead>
           <tr>
-            <th colSpan={43}>
+            <th colSpan={39}>
               <div className="table-actions">
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   {check_amount()}/{selection.length} ausgewählt
@@ -228,13 +243,13 @@ function BuyerList() {
                 indeterminate={selection.includes(true) && selection.includes(false)}
               />
             </th>
+            <th colSpan={1}>Typ</th>
             <th className="square-td"></th>
             <th colSpan={3}>Name</th>
             <th colSpan={1}>ID</th>
             <th colSpan={4}>Adresse</th>
             <th colSpan={3}>E-Mail</th>
             <th colSpan={3}>Telefon</th>
-            <th colSpan={1}>Typ</th>
             <th colSpan={3}>Zimmer</th>
             <th colSpan={3}>m²</th>
             <th colSpan={4}>
@@ -253,6 +268,7 @@ function BuyerList() {
                 </Grid>
               </Grid>
             </th>
+            {/*
             <th colSpan={4}>
               <Grid container>
                 <Grid item xs={12}>
@@ -275,6 +291,7 @@ function BuyerList() {
                 </Tooltip>
               </Grid>
             </th>
+             */}
             <th colSpan={3}>Kaufpreis</th>
             <th colSpan={4}>Kommentar</th>
             <th className="square-td">
@@ -293,7 +310,7 @@ function BuyerList() {
               </td>
             </tr>
           ) : (
-            STANDINS.map((applicant, idx) => (
+            applicants.map((applicant, idx) => (
               <ApplicantRow
                 key={applicant.id}
                 applicant={applicant}

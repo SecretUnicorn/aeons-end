@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import BuyerList from '@/components/BuyerList/BuyerList';
 import SendAppointmentDialog from '@/components/Dialogs/SendAppointmentDialog';
 import Meta from '@/components/Meta';
 import { FullSizeCenteredFlexBox } from '@/components/styled';
@@ -30,7 +31,7 @@ function Welcome() {
         recipients={[]}
         selectedValue=""
       />
-      <button onClick={() => setOpen(true)}>Plus</button>
+      <BuyerList />
     </>
   );
 }
