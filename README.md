@@ -13,6 +13,7 @@ npm run dev
 ### Husky
 
 Staged files are getting automaticly checked with eslint. Only code with 0 warnings can be commited!
+
 _**Warning:** When errors are present fix those and use `git add .` otherwise the next commit try overrides the changes!_
 
 ### Env-Files
