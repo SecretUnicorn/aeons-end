@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "lib": ["ES6", "DOM.Iterable", "DOM",],
+    "target": "ES6",
+    "skipLibCheck": true,
+    //"checkJs": true,
+    "moduleResolution": "Node",
+    "module": "ES2020",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+    },
+  },
+  "include": ["src/**/*.js", "src/**/*.jsx"],
+  "exclude": ["node_modules"]
+}
