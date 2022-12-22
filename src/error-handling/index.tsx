@@ -11,9 +11,11 @@ function withErrorHandler<P extends object>(
 ) {
   function ComponentWithErrorHandling(props: P) {
     return (
-      <ErrorBoundary FallbackComponent={Fallback}>
-        <Component {...(props as P)} />
-      </ErrorBoundary>
+      <>
+        <ErrorBoundary FallbackComponent={Fallback}>
+          <Component {...(props as P)} />
+        </ErrorBoundary>
+      </>
     );
   }
 

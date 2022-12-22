@@ -11,13 +11,13 @@ import Sidebar from '@/sections/Sidebar';
 
 function App() {
   return (
-    <Fragment>
+    <>
       <CssBaseline />
       <BrowserRouter>
         <Header />
         <Pages />
       </BrowserRouter>
-    </Fragment>
+    </>
   );
 }
 

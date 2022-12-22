@@ -9,11 +9,11 @@ export const WhiteCheckbox = styled(Checkbox, { skipVariantsResolver: true })(({
     color: 'white',
   },
   color: 'white',
-}));
+})) as typeof Checkbox;
 
 export const PrimaryColorCheckbox = styled(Checkbox)(({ theme }) => ({
   color: theme.palette.primary.main,
   '&.Mui-checked': {
     color: theme.palette.primary.main,
   },
-}));
+})) as typeof Checkbox;
