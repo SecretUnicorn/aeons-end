@@ -43,8 +43,7 @@
       "prettier --write"
     ],
     "src/**/*.{js,jsx,ts,tsx,json}": [
-      "eslint --fix --max-warnings=0",
-      "git add"
+      "eslint --fix --max-warnings=0"
     ]
   }
 }
