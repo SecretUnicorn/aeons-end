@@ -1,24 +1,30 @@
 import * as path from 'path';
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    hmr: true,
-    port: 3100,
-  },
-  
-  build: {
-    assetsDir: "assets"
-  },
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
+export default ({ mode }) => {
+  process.env = {...process.env, ...loadEnv(mode, process.cwd())};
+  const basename = process.env.VITE_DEPLOY_BASE_NAME ?? '/';
+  const devport = process.env.VITE_DEV_PORT ?? 3100;
+
+  return defineConfig({
+    plugins: [react()],
+    server: {
+      hmr: true,
+      port: devport,
     },
-  },
-  define: {
-    global: 'window',
-  },
-})
+    base: basename,
+    build: {
+      assetsDir: "assets"
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+      },
+    },
+    define: {
+      global: 'window',
+    },
+  })
+}
+

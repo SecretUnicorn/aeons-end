@@ -28,3 +28,9 @@ _**Warning:** When errors are present fix those and use `git add .` otherwise th
 ```
 
 For more information refer to: https://vitejs.dev/guide/env-and-mode.html
+
+| Name                  | Type | Default | Example                 | Required?  |
+|-----------------------|------|---------|-------------------------|----------- |
+| VITE_API_BASE         | STR  | -       | http://10.10.10.57:8100 | ✅         |
+| VITE_DEPLOY_BASE_NAME | STR  | /       | /kaufinteressten/       | ❌         |
+| VITE_DEV_PORT         | INT  | 3100    | 3200                    | ❌         |
