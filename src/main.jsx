@@ -6,15 +6,18 @@ import "./index.css";
 import { RecoilRoot } from "recoil";
 import StyledEngineProvider from "@mui/material/StyledEngineProvider";
 import CustomThemeProvider from "@/theme/Provider";
+import { HelmetProvider } from "react-helmet-async";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RecoilRoot>
-      <CustomThemeProvider>
-        <StyledEngineProvider>
-          <App />
-        </StyledEngineProvider>
-      </CustomThemeProvider>
+      <HelmetProvider>
+        <CustomThemeProvider>
+          <StyledEngineProvider>
+            <App />
+          </StyledEngineProvider>
+        </CustomThemeProvider>
+      </HelmetProvider>
     </RecoilRoot>
   </React.StrictMode>
 );
