@@ -1,23 +1,4 @@
-import HomeIcon from "@mui/icons-material/Home";
-import NotFound from "@/pages/NotFound/NotFound";
-import Welcome from "@/pages/Welcome/Welcome";
+import { POSSIBLE_ROUTES, routes } from "./Pages/Pages";
 
-const Pages = {
-  HOMEPAGE: "HOMEPAGE",
-  NOTFOUND: "NOTFOUND",
-};
 
-const routes = {
-  [Pages.HOMEPAGE]: {
-    component: Welcome,
-    path: "/",
-    title: "Welcome",
-    icon: HomeIcon,
-  },
-  [Pages.NOTFOUND]: {
-    component: NotFound,
-    path: "*",
-  },
-};
-
-export default routes;
+export {POSSIBLE_ROUTES, routes};
