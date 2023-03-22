@@ -1,0 +1,6 @@
+[submodule "pre-built-component"]
+	path = pre-built-component
+	url = https://gitlab.8gm.subdns.de/z.amrani/pre-built-component.git
+[submodule "src/prebuilt_components"]
+	path = src/prebuilt_components
+	url = https://gitlab.8gm.subdns.de/z.amrani/pre-built-component.git
