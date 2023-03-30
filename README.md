@@ -1,15 +1,14 @@
 # Setup
 
 Node is required: https://nodejs.org/en/download/
+Git is required ... duh
 ```bash
-npm install -g npx
 git clone --recurse-submodules ssh://git@gitlab.8gm.subdns.de:2222/nahlers/react-template.git APPNAME
 cd APPNAME
 # If submodules have not been initialized use
 # git submodule init
 # git submodule update
-rm -rf ./git/
-git init
+git remote set-url origin <remote_url> # Do this to not push into this repository
 npm install
 npm run prepare
 touch .env.local
