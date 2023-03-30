@@ -3,7 +3,13 @@
 Node is required: https://nodejs.org/en/download/
 ```bash
 npm install -g npx
-npx degit https://gitlab.8gm.subdns.de/nahlers/react-template
+git clone --recurse-submodules ssh://git@gitlab.8gm.subdns.de:2222/nahlers/react-template.git APPNAME
+cd APPNAME
+# If submodules have not been initialized use
+# git submodule init
+# git submodule update
+rm -rf ./git/
+git init
 npm install
 npm run prepare
 touch .env.local
