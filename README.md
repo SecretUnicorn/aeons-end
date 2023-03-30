@@ -12,7 +12,7 @@ git remote set-url origin <remote_url> # Do this to not push into this repositor
 npm install
 npm run prepare
 touch .env.local
-echo VITE_API_BASE=http://10.10.10.57:8100 > .env.local
+echo VITE_API_BASE= DJANGO_URL > .env.local
 npm run dev
 ```
 
