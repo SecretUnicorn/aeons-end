@@ -4,9 +4,18 @@ const sharedTheme = {
   palette: {
     primary: {
       main: "#406a86",
+      light: "#a3d7df",
     },
     secondary: {
       main: "#fac6a0",
+    },
+    disabled: {
+      main: "#adadad",
+    },
+    greyIcon: {
+      light: "#696969",
+      main: "#575757",
+      dark: "#3d3d3d",
     },
   },
   typography: {
@@ -97,6 +106,33 @@ const sharedTheme = {
         },
         textTransform: "none",
       },
+      variants: [
+        {
+          props: { variant: "mwl" },
+          style: {
+            textTransform: "none",
+            color: "white",
+            backgroundColor: "hsl(0, 0%, 18%)",
+            justifyContent: "flex-start",
+            fontWeight: "normal",
+            borderRadius: "0.4em",
+            marginBottom: "4px",
+            lineHeight: 1.3,
+            "&:hover": {
+              color: "white",
+              backgroundColor: "#484848",
+            },
+            "&:disabled": {
+              backgroundColor: "lightgray",
+              color: "black",
+            },
+            "& .MuiButton-startIcon": {
+              width: "0.875em",
+              marginRight: "1em",
+            },
+          },
+        },
+      ],
     },
     MuiOutlinedInput: {
       styleOverrides: {
@@ -120,6 +156,17 @@ const sharedTheme = {
         },
       },
     },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          color: "#575757",
+        },
+        h6: {
+          fontWeight: "bold",
+          marginTop: "1em",
+        },
+      },
+    },
     MuiDataGrid: {
       styleOverrides: {
         footer: {
@@ -134,10 +181,10 @@ const sharedTheme = {
           padding: 0,
         },
         row: {
-          "&:nth-child(2n+1)": {
+          "&:nth-of-type(2n+1)": {
             backgroundColor: "#e8e8e8",
           },
-          "&:nth-child(2n)": {
+          "&:nth-of-type(2n)": {
             backgroundColor: "#f5f5f5",
           },
         },
