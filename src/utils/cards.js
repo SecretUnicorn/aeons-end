@@ -1,0 +1,69 @@
+const CARD_TYPES = {
+  PLAYER_ONE: "PLAYER_ONE",
+  PLAYER_TWO: "PLAYER_TWO",
+  PLAYER_THREE: "PLAYER_THREE",
+  PLAYER_FOUR: "PLAYER_FOUR",
+  NEMESIS: "NEMESIS",
+  PLAYER_ONE_AND_TWO: "PLAYER_ONE_AND_TWO",
+  PLAYER_THREE_AND_FOUR: "PLAYER_THREE_AND_FOUR",
+  PLAYER_CHOOSE: "PLAYER_CHOOSE",
+};
+
+const GAME_TYPES = {
+  SOLO: "SOLO",
+  DUO: "DUO",
+  TRIO: "TRIO",
+  QUAD: "QUAD",
+  QUAD_EASY: "QUAD_EASY",
+};
+
+const generateStartDeck = (game_type) => {
+  switch (game_type) {
+    case GAME_TYPES.SOLO:
+      return [
+        CARD_TYPES.PLAYER_ONE,
+        CARD_TYPES.PLAYER_ONE,
+        CARD_TYPES.PLAYER_ONE,
+        CARD_TYPES.NEMESIS,
+        CARD_TYPES.NEMESIS,
+      ];
+    case GAME_TYPES.DUO:
+      return [
+        CARD_TYPES.PLAYER_ONE,
+        CARD_TYPES.PLAYER_ONE,
+        CARD_TYPES.PLAYER_TWO,
+        CARD_TYPES.PLAYER_TWO,
+        CARD_TYPES.NEMESIS,
+        CARD_TYPES.NEMESIS,
+      ];
+    case GAME_TYPES.TRIO:
+      return [
+        CARD_TYPES.PLAYER_ONE,
+        CARD_TYPES.PLAYER_TWO,
+        CARD_TYPES.PLAYER_THREE,
+        CARD_TYPES.PLAYER_CHOOSE,
+        CARD_TYPES.NEMESIS,
+        CARD_TYPES.NEMESIS,
+      ];
+    case GAME_TYPES.QUAD:
+      return [
+        CARD_TYPES.PLAYER_ONE,
+        CARD_TYPES.PLAYER_TWO,
+        CARD_TYPES.PLAYER_THREE,
+        CARD_TYPES.PLAYER_FOUR,
+        CARD_TYPES.NEMESIS,
+        CARD_TYPES.NEMESIS,
+      ];
+    case GAME_TYPES.QUAD_EASY:
+      return [
+        CARD_TYPES.PLAYER_ONE_AND_TWO,
+        CARD_TYPES.PLAYER_ONE_AND_TWO,
+        CARD_TYPES.PLAYER_THREE_AND_FOUR,
+        CARD_TYPES.PLAYER_THREE_AND_FOUR,
+        CARD_TYPES.NEMESIS,
+        CARD_TYPES.NEMESIS,
+      ];
+    default:
+      return [];
+  }
+};
